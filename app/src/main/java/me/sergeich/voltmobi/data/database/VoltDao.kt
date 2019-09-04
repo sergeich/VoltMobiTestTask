@@ -19,4 +19,7 @@ interface VoltDao {
 
     @Query("SELECT COUNT(post_id) FROM post")
     fun postCount(): Int
+
+    @Query("SELECT * FROM post WHERE post_id = :postId")
+    fun getPost(postId: Int): LiveData<Post>
 }

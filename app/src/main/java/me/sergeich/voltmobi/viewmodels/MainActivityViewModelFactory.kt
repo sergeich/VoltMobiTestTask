@@ -1,4 +1,4 @@
-package me.sergeich.voltmobi.ui.list
+package me.sergeich.voltmobi.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

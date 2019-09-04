@@ -43,6 +43,11 @@ class VoltRepository(
         return voltDao.getPostsList()
     }
 
+    fun getPost(postId: Int): LiveData<Post> {
+        initData()
+        return voltDao.getPost(postId)
+    }
+
     companion object {
         private val LOCK = Any()
 

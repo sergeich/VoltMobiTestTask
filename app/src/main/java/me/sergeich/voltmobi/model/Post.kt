@@ -16,7 +16,7 @@ data class Post(
     val userId: Int,
 
     @PrimaryKey @ColumnInfo(name = "post_id")
-    val id: Long,
+    val id: Int,
 
     @ColumnInfo(name = "title")
     val title: String,

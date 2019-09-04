@@ -5,7 +5,8 @@ import me.sergeich.voltmobi.data.VoltRepository
 import me.sergeich.voltmobi.data.database.VoltDatabase
 import me.sergeich.voltmobi.data.datasource.MockDataSource
 import me.sergeich.voltmobi.data.datasource.VoltDataSource
-import me.sergeich.voltmobi.ui.list.MainActivityViewModelFactory
+import me.sergeich.voltmobi.viewmodels.DetailActivityViewModelFactory
+import me.sergeich.voltmobi.viewmodels.MainActivityViewModelFactory
 
 /**
  * Simple "DI"
@@ -29,5 +30,13 @@ object Injector {
     fun provideMainActivityViewModelFactory(context: Context): MainActivityViewModelFactory {
         val repository = provideRepository(context)
         return MainActivityViewModelFactory(repository)
+    }
+
+    fun provideDetailActivityViewModelFactory(
+        context: Context,
+        postId: Int
+    ): DetailActivityViewModelFactory {
+        val repository = provideRepository(context)
+        return DetailActivityViewModelFactory(repository, postId)
     }
 }

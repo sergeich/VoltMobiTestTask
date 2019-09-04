@@ -1,5 +1,6 @@
 package me.sergeich.voltmobi.ui.list
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
@@ -7,7 +8,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.RecyclerView
 import me.sergeich.voltmobi.R
+import me.sergeich.voltmobi.ui.detail.DetailActivity
 import me.sergeich.voltmobi.util.Injector
+import me.sergeich.voltmobi.viewmodels.MainActivityViewModel
 
 
 class MainActivity : FragmentActivity() {
@@ -20,6 +23,14 @@ class MainActivity : FragmentActivity() {
         setContentView(R.layout.activity_main)
 
         val adapter = PostAdapter()
+        adapter.postClickListener = object : PostAdapter.PostClickListener {
+            override fun onPostClick(postId: Int) {
+                val intent = Intent(this@MainActivity, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.ARG_POST_ID, postId)
+                startActivity(intent)
+            }
+        }
+
         recyclerView = findViewById(R.id.main_recycler)
         recyclerView.adapter = adapter
         recyclerView.itemAnimator = DefaultItemAnimator()

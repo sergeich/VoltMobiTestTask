@@ -8,6 +8,8 @@ import me.sergeich.voltmobi.model.Post
 
 class PostAdapter : ListAdapter<Post, PostViewHolder>(DIFF_CALLBACK) {
 
+    var postClickListener: PostClickListener? = null
+
     init {
         setHasStableIds(true)
     }
@@ -17,11 +19,11 @@ class PostAdapter : ListAdapter<Post, PostViewHolder>(DIFF_CALLBACK) {
     }
 
     override fun getItemId(position: Int): Long {
-        return getItem(position)?.id ?: NO_ID
+        return getItem(position)?.id?.toLong() ?: NO_ID
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
-        return PostViewHolder.inflate(parent)
+        return PostViewHolder.inflate(parent, postClickListener)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
@@ -29,6 +31,11 @@ class PostAdapter : ListAdapter<Post, PostViewHolder>(DIFF_CALLBACK) {
             holder.bind(post)
         }
     }
+
+    interface PostClickListener {
+        fun onPostClick(postId: Int)
+    }
+
 
     companion object {
 

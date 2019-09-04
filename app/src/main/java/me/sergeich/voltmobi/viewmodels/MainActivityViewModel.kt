@@ -1,4 +1,4 @@
-package me.sergeich.voltmobi.ui.list
+package me.sergeich.voltmobi.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
