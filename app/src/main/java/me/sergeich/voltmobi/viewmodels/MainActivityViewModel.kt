@@ -6,12 +6,8 @@ import me.sergeich.voltmobi.data.VoltRepository
 import me.sergeich.voltmobi.model.Post
 
 
-class MainActivityViewModel(private val repository: VoltRepository) : ViewModel() {
+class MainActivityViewModel(repository: VoltRepository) : ViewModel() {
 
-    var posts: LiveData<List<Post>>
-        private set
+    val posts: LiveData<List<Post>> = repository.getPostsList()
 
-    init {
-        posts = repository.getPostsList()
-    }
 }

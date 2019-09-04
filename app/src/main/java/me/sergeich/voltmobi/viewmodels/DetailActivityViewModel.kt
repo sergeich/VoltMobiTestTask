@@ -7,14 +7,10 @@ import me.sergeich.voltmobi.model.Post
 
 
 class DetailActivityViewModel(
-    private val repository: VoltRepository,
-    private val postId: Int
+    repository: VoltRepository,
+    postId: Int
 ) : ViewModel() {
 
-    var post: LiveData<Post>
-        private set
+    val post: LiveData<Post> = repository.getPost(postId)
 
-    init {
-        post = repository.getPost(postId)
-    }
 }
