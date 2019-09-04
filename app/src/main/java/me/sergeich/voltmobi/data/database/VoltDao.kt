@@ -13,7 +13,14 @@ interface VoltDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(vararg posts: Post)
 
-    @Query("SELECT * FROM post ORDER BY post_id DESC")
+    @Query("SELECT " +
+                "user_id, post_id, title, " +
+                "CASE WHEN LENGTH(body) > $BODY_LIMIT " +
+                "THEN SUBSTR(body, 1, $BODY_LIMIT)||'…' " +
+                "ELSE body " +
+                "END as body " +
+            "FROM post " +
+            "ORDER BY post_id DESC")
     @Transaction
     fun getPostsList(): LiveData<List<Post>>
 
@@ -22,4 +29,8 @@ interface VoltDao {
 
     @Query("SELECT * FROM post WHERE post_id = :postId")
     fun getPost(postId: Int): LiveData<Post>
+
+    companion object {
+        const val BODY_LIMIT = 100
+    }
 }
